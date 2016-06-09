@@ -1,0 +1,11 @@
+---
+
+linters:
+  FinalNewline:
+    enabled: true
+  ContentStyle:
+    enabled: true
+    addendum: "Questions? Contact #product-content on Slack or @Shopify/product-content on GitHub."
+    rule_set:
+      - violation: 'lite plan'
+        suggestion: 'Lite plan'
