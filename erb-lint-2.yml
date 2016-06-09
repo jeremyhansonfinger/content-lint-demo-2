@@ -14,6 +14,7 @@ linters:
       - violation: 'lite plan'
         suggestion: 'Lite plan'
         
+# Check for deprecated classes        
   DeprecatedClasses:
       enabled: true
       addendum: "If you’re having trouble feel free to reach out to #admin-fed."
