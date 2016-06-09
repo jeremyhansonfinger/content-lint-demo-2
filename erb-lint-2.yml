@@ -1,8 +1,11 @@
 ---
 
 linters:
+# Newline at end of file required when enabled
   FinalNewline:
     enabled: true
+    
+# Check content style  
   ContentStyle:
     enabled: true
     addendum: "Questions? Contact #product-content on Slack or @Shopify/product-content on GitHub."
