@@ -13,3 +13,15 @@ linters:
     
       - violation: 'lite plan'
         suggestion: 'Lite plan'
+        
+  DeprecatedClasses:
+      enabled: true
+      addendum: "If you’re having trouble feel free to reach out to #admin-fed."
+      rule_set:
+        #########################################################################################
+        # Old Classes --> Components                                                            #
+        #########################################################################################
+  
+        # Badge classes (app/assets/stylesheets/ui-kit/components/_badge.scss)
+        - deprecated: ['badge[-_\w]*']
+          suggestion: "Use the Badge Component (styleguide.myshopify.com/components/badge)."
