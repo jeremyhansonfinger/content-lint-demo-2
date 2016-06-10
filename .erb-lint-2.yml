@@ -11,7 +11,12 @@ linters:
     addendum: "Questions? Contact #product-content on Slack or @Shopify/product-content on GitHub."
     rule_set:
     
-      - violation: 'lite plan'
+      - violation: ['[Dd]ropdown menu', '[Dd]rop down menu']
+        suggestion: 'drop-down menu'
+      - violation: ['^((?!Shopify Help Center).)*[Hh]elp [Cc]enter']
+        suggestion: 'Shopify Help Center'
+        violation_condensed: help center
+      - violation: ['lite plan', '[Ll]ight [Pp]lan']
         suggestion: 'Lite plan'
         
 # Check for deprecated classes        
