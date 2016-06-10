@@ -13,11 +13,13 @@ linters:
     
       - violation: ['[Dd]ropdown menu', '[Dd]rop down menu']
         suggestion: 'drop-down menu'
+        violation_condensed: "dropdown menu/drop down menu"
       - violation: ['^((?!Shopify Help Center).)*[Hh]elp [Cc]enter']
         suggestion: 'Shopify Help Center'
         violation_condensed: 'help center'
       - violation: ['lite plan', '[Ll]ight [Pp]lan']
         suggestion: 'Lite plan'
+        violation_condensed: "lite plan/light plan"
         
 # Check for deprecated classes        
   DeprecatedClasses:
