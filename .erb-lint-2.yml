@@ -15,7 +15,7 @@ linters:
         suggestion: 'drop-down menu'
       - violation: ['^((?!Shopify Help Center).)*[Hh]elp [Cc]enter']
         suggestion: 'Shopify Help Center'
-        violation_condensed: help center
+        violation_condensed: 'help center'
       - violation: ['lite plan', '[Ll]ight [Pp]lan']
         suggestion: 'Lite plan'
         
