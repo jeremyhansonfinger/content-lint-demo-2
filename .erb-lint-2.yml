@@ -1,33 +1,760 @@
 ---
 
 linters:
-# Newline at end of file required when enabled
+  # Newline at end of file required when enabled
   FinalNewline:
-    enabled: true
-    
-# Check content style  
+    enabled: false
+
+  # We use this to manage which css classes we don't want used in our HTML tags. No ERB tags as of yet.
+  DeprecatedClasses:
+    enabled: false
+    addendum: "If you’re having trouble feel free to reach out to [#admin-fed](https://shopify.slack.com/messages/admin-fed)."
+    rule_set:
+      #########################################################################################
+      # Old Classes --> Components                                                            #
+      #########################################################################################
+
+      # Badge classes (app/assets/stylesheets/ui-kit/components/_badge.scss)
+      - deprecated: ['badge[-_\w]*']
+        suggestion: "Use the [Badge Component](http://styleguide.myshopify.com/components/badge)."
+
+      # Blank/Empty State classes (app/assets/stylesheets/admin/modules/_[blank_state|empty-state].scss)
+      - deprecated: ['blank-slate[-_\w]*', 'zero-state[-_\w]*', 'bg', 'table-blank-slate', 'empty-state[-_\w]*']
+        suggestion: "Use the [Empty State Component](http://styleguide.myshopify.com/components/ui_empty_state)."
+
+      # Box classes (app/assets/stylesheets/admin/modules/_box.scss)
+      - suggestion: >
+                      If the box is used with a status modifier (notice, warning, etc) then use the
+                      [Banner Component](http://styleguide.myshopify.com/components/banner), otherwise use the
+                      [Card Component](http://styleguide.myshopify.com/components/card).'
+        deprecated:
+          - 'box[-_\w]*'
+          - 'header-inline'
+          - 'subcontainer'
+          - 'modal-notice'
+          - 'modal-warning'
+          - 'header-notice'
+          - 'inset-header-notice'
+          - 'attach-to-top'
+          - 'inline-action-links'
+          - 'divider-box'
+          - 'box-content-filled'
+          - 'plain-template-warning'
+          - 'inline-box'
+
+      # Bare btn class (app/assets/stylesheets/admin/modules/_btn.scss)
+      - deprecated: ['btn']
+        suggestion: >
+                      If the link is not being used for hyperlinking, replace it with a [Button]
+                      (http://styleguide.myshopify.com/components/button).
+
+      # Disabled btn class (app/assets/stylesheets/admin/modules/_btn.scss)
+      - deprecated: ['btn-disabled']
+        suggestion: >
+                      Use `ui_button_tag(disabled: true)` with the `disabled` property instead
+                      ([Button Component](http://styleguide.myshopify.com/components/button)).
+
+      # Flag classes (app/assets/stylesheets/admin/modules/_flags.scss)
+      - deprecated: ['flag[-_\w]*']
+        suggestion: "Use [next-flag](http://styleguide.myshopify.com/components/next_flag) instead."
+
+      # Grid/Wrappable classes (app/assets/stylesheets/admin/layout/_[next-grid|wrappable].scss)
+      - deprecated: ['next-grid[-_\w]*', 'wrappable[-_\w]*']
+        suggestion: "Use the [Stack Component](http://styleguide.myshopify.com/components/stack)."
+
+      # Icon classes (app/assets/stylesheets/admin/modules/_icon.scss)
+      - deprecated: ['ico[-_\w]*', 'page-(prev|next|down|up|down-slate-lighter)', 'remove-icon']
+        suggestion: "Use the [Icon Component](http://styleguide.myshopify.com/components/icon)."
+
+      # Modal classes (app/assets/stylesheets/admin/modules/_modal.scss)
+      - suggestion: "Use the [UI Modal Component](http://styleguide.myshopify.com/components/ui_modal)."
+        deprecated:
+          - 'modal[-_\w]*'
+          - 'graphic-modal[-_\w]*'
+          - 'aviary-modal'
+          - 'authentication-modal-qr-code'
+          - 'close-modal'
+          - 'expand-modal'
+          - 'body'
+          - 'body--next-ui'
+          - 'body--no-padding'
+          - 'buttons'
+          - 'large-modal'
+          - 'small-modal'
+          - 'small-long-modal'
+          - 'fullwidth-modal'
+          - 'real-fullscreen-modal'
+
+      # Span classes (app/assets/stylesheets/admin/layout/_layout.scss)
+      - deprecated: ['span\d+']
+        suggestion: "Use the [Stack Component](http://styleguide.myshopify.com/components/stack)."
+      
+      # Bare tabs/tab class (app/assets/stylesheets/admin/modules/_tabs.scss)
+      - deprecated: ['tabs', 'tab']
+        suggestion: "Use the [Tab Component](http://styleguide.myshopify.com/components/tab)."
+
+      #########################################################################################
+      # Global Helper classes from app/assets/stylesheets/admin/global/_helpers.scss          #
+      #########################################################################################
+
+      # Visually Hidden
+      - deprecated: ['is-visuallyhidden', 'ui-helper-hidden-accessible']
+        suggestion: "Use `helper--visually-hidden` or `helper--visually-hidden-focusable` instead."
+
+      # Margin Helpers
+      - suggestion: >
+                      Use the spacing option on a [Stack](http://styleguide.myshopify.com/components/stack)
+                      or refer to our [Layout Guide](http://styleguide.myshopify.com/style/layout).
+        deprecated:
+          - 's-none'
+          - 's'
+          - 'ss'
+          - 'st'
+          - 'sst'
+          - 'sr'
+          - 'ssr'
+          - 'sb'
+          - 'ssb'
+          - 'ssb--thin'
+          - 'sssb'
+          - 'sl'
+          - 'ssl'
+
+      # Padding Helpers
+      - suggestion: >
+                      Use the [Stack Component](http://styleguide.myshopify.com/components/stack)
+                      or refer to our [Layout Guide](http://styleguide.myshopify.com/style/layout).
+        deprecated:
+          - 'p-none'
+          - 'pt-none'
+          - 'pr-none'
+          - 'pl-none'
+          - 'p'
+          - 'pp'
+          - 'pt'
+          - 'ppt'
+          - 'pppt'
+          - 'pr'
+          - 'ppr'
+          - 'pb'
+          - 'ppb'
+          - 'pl'
+          - 'ppl'
+          - 'pppl'
+
+      # Float Helpers
+      - deprecated: ['fr', 'fl', 'fn']
+        suggestion: >
+                      Use the alignment option on a [Stack](http://styleguide.myshopify.com/components/stack)
+                      or refer to our [Layout Guide](http://styleguide.myshopify.com/style/layout).
+        
+      # Text Align Helpers
+      - deprecated: ['tr']
+        suggestion: "Use `type--right`."
+      - deprecated: ['tl']
+        suggestion: "Use `type--left`."
+      - deprecated: ['tc']
+        suggestion: "Use `type--centered`."
+
+      # Miscellaneous Helpers and dependants (just dont use these)
+      - suggestion: "This is deprecated due to its difficulty in maintenance. Talk to Admin-FED to find a proper solution."
+        deprecated:
+          - 'block'
+          - 'is-transitioning'
+          - 'inline'
+          - 'inline-block'
+          - 'table'
+          - 'table-cell'
+          - 'divider'
+          - 'divider-slim'
+          - 'divider-top'
+          - 'has-inline-errors'
+          - 'p-rel'
+          - 'no-wrap'
+          - 'w-auto'
+          - 'wait'
+          - 'pointer'
+          - 'cursor-default'
+          - 'va-t'
+          - 'va-m'
+          - 'relative'
+          - 'fixed'
+          - 'updated'
+          - 'underline'
+          - 'mono'
+          - 'uppercase'
+          - 'dashed-text'
+          - 'paragraph'
+          - 'ir'
+          - 'top'
+          - 'animate'
+          - 'animate-rotate'
+
+      #########################################################################################
+      # Typography Helper classes from app/assets/stylesheets/admin/global/_type.scss         #
+      #########################################################################################
+
+      # Ellipsis/Truncate Helper
+      - deprecated: ['ellipsis-text', 'truncate', 'is-truncated']
+        suggestion: "Use `type--truncated` or `type--truncated--block`."
+
+      # Font Weight Helpers
+      - deprecated: ['fw-strong', 'fw-strong-black']
+        suggestion: "Use `type--semi-bold` or `type--bold`."
+        
+      # Type Color Helpers
+      - deprecated: ['heading-success']
+        suggestion: "Use `type--success`"
+      - deprecated: ['heading-error']
+        suggestion: "Use `type--danger`"
+      - deprecated: ['heading-warning']
+        suggestion: "Use `type--warning`"
+      - deprecated: ['heading-subdued']
+        suggestion: "Use `type--subdued`"
+
+      # Miscellaneous Helpers and dependants (just dont use these)
+      - suggestion: "This is deprecated due to its difficulty in maintenance. Talk to Admin-FED to find a proper solution."
+        deprecated:
+          - 'x-large'
+          - 'xx-large'
+          - 'large'
+          - 'small'
+          - 'x-small'
+          - 'fw-normal'
+          - 'capitalize'
+          - 'light'
+          - 'lbl-light'
+          - 'description'
+          - 'heading'
+          - 'table-dropdown'
+
+  # We use ContentStyle checker to check for Shopify content style guide
+  # violations (see: https://styleguide.myshopify.com/content). 
+
+  # Note that for the moment if you are adding a violation contained within
+  # another violation (e.g. 'Admin' is part of 'Shopify Admin'), the containing
+  # violation needs to come first in the list. If not, you'll get two errors,
+  # one for each violation, for a line that includes the containing violation.
+  # We're working on a solution so that the order of the list doesn't matter in
+  # this case.
+
   ContentStyle:
     enabled: true
-    addendum: "Questions? Contact #product-content on Slack or @Shopify/product-content on GitHub."
+    addendum: "Questions? Contact [#product-content](https://shopify.slack.com/messages/product-content/) on Slack or @Shopify/product-content on GitHub." 
     rule_set:
-    
-      - violation: ['[Dd]ropdown menu', '[Dd]rop down menu']
-        suggestion: 'drop-down menu'
-      - violation: ['^((?!Shopify Help Center).)*[Hh]elp [Cc]enter']
+      - violation:
+          - 'dropdown'
+          - 'drop down'
+        case_insensitive: true
+        suggestion: "drop-down"
+
+      - violation: 
+          - 'Shopify partner'
+        suggestion: 'Shopify Partner'
+
+      - violation: 
+          - 'Shopify partners'
+        suggestion: 'Shopify Partners'
+
+      - violation:
+          - 'manual'
+          - 'Shopify manual'
+          - 'docs'
+          - 'documentation'
+          - 'support docs'
+        case_insensitive: true
         suggestion: 'Shopify Help Center'
-        violation_condensed: 'help center'
-      - violation: ['lite plan', '[Ll]ight [Pp]lan']
-        suggestion: 'Lite plan'
-        
-# Check for deprecated classes        
-  DeprecatedClasses:
-      enabled: true
-      addendum: "If you’re having trouble feel free to reach out to #admin-fed."
-      rule_set:
-        #########################################################################################
-        # Old Classes --> Components                                                            #
-        #########################################################################################
-  
-        # Badge classes (app/assets/stylesheets/ui-kit/components/_badge.scss)
-        - deprecated: ['badge[-_\w]*']
-          suggestion: "Use the Badge Component (styleguide.myshopify.com/components/badge)."
+
+      - violation:
+          - 'Help Center'
+          - 'help center'
+        suggestion: 'Shopify Help Center'
+
+      - violation:
+          - 'theme store'
+          - 'Theme Store'
+        suggestion: 'Shopify theme store'
+
+      - violation: 'Theme'
+        suggestion: 'theme'
+
+      - violation: 'Themes'
+        suggestion: 'themes'
+
+      - violation: 
+          - 'store’s admin'
+          - "store's admin"
+          - 'backend store admin'
+          - 'back-end store admin'
+          - 'admin'
+        case_insensitive: true
+        suggestion: 'Shopify admin'
+
+      - violation: 'Shopify Admin'
+        suggestion: 'Shopify admin'
+
+      - violation: 'Store'
+        suggestion: 'store'
+
+      - violation: 'Stores'
+        suggestion: 'stores'
+
+      - violation: 
+          - 'application'
+        case_insensitive: true
+        suggestion: 'app'
+
+      - violation: 
+          - 'applications'
+        case_insensitive: true
+        suggestion: 'apps'
+
+      - violation: 
+          - 'App'
+        suggestion: 'app'
+
+      - violation: 
+          - 'Apps'
+        suggestion: 'apps'
+
+      # - violation:
+      #     - '-\$'
+      #   suggestion: '(minus signs before dollar amounts)'
+
+      # - violation:
+      #     - '\d-\d'
+      #   suggestion: '(en dashes in date ranges)'
+
+      - violation: 'Lite Shopify Plan'
+        case_insensitive: true
+        suggestion: 'Lite Shopify'
+
+      - violation: 'Basic Shopify Plan'
+        case_insensitive: true
+        suggestion: 'Basic Shopify'
+
+      - violation: 
+          - 'Professional Shopify Plan'
+          - 'Professional Plan'
+          - 'Pro Shopify Plan'
+          - 'Pro Plan'
+        case_insensitive: true
+        suggestion: 'Shopify'
+
+      - violation: 'shopify'
+        suggestion: 'Shopify'
+
+      - violation: 
+          - 'Unlimited Shopify Plan'
+          - 'Unlimited Shopify Plan'
+          - 'Unlimited Plan'  
+        case_insensitive: true
+        suggestion: 'Advanced Shopify'
+
+      - violation: 'discount number'     
+        suggestion: 'discount code'
+        case_insensitive: true
+
+      - violation: 'discount numbers'     
+        suggestion: 'discount codes'
+        case_insensitive: true
+
+      - violation: 
+          - 'drop shipping'
+          - 'drop-shipping'
+        case_insensitive: true
+        suggestion: 'dropshipping'
+
+      - violation: 
+          - 'e-commerce'
+          - 'E-commerce'
+          - 'Ecommerce'
+        suggestion: 'ecommerce'
+
+      - violation:
+          - 'e-mail'
+          - 'email address'
+        case_insensitive: true
+        suggestion: 'email'
+
+      - violation:
+          - 'e-mails'
+          - 'email addresses'
+        case_insensitive: true
+        suggestion: 'emails'
+
+      - violation: 'Email'
+        suggestion: 'email'
+
+      - violation: 'Emails'
+        suggestion: 'emails'
+
+      - violation: 
+          - 'Internet'
+          - 'Web'
+          - 'web'
+        suggestion: 'internet'
+
+      - violation: 
+          - 'line item'
+        suggestion: 'item'
+
+      - violation:
+          - 'line items'
+        suggestion: 'items'
+
+      - violation: 
+          - 'Link'
+          - 'hyperlink'
+          - 'hyper-link'
+        suggestion: 'links'
+
+      - violation: 
+          - 'Links'
+          - 'hyperlinks'
+          - 'hyper-links'
+        suggestion: 'links'
+
+      - violation: 'liquid'
+        suggestion: 'Liquid'
+
+      - violation:
+          - 'main theme'
+          - 'current theme'
+          - 'active theme'
+        case_insensitive: true
+        suggestion: 'published theme'
+
+      - violation: 
+          - 'Responsive Checkout'
+          - 'Shopify Responsive Checkout'
+        suggestion: 'responsive checkout'
+
+      - violation: 
+          - 'POS store'
+          - 'Retail store'
+        suggestion: 'retail store'
+
+      - violation: 
+          - 'POS stores'
+          - 'Retail stores'
+        suggestion: 'retail stores'
+
+      - violation: 
+          - 'Shopify Gurus'
+          - 'gurus'
+          - 'Shopify call center'
+          - 'Shopify Help Staff'
+        case_insensitive: true
+        suggestion: 'Shopify Support'
+
+      - violation: 'Shopify support'
+        suggestion: 'Shopify Support'
+
+      - violation: 'Shopify home'
+        suggestion: 'Shopify Home'
+
+      - violation: 
+          - 'Shopify payments'
+          - 'payments'
+        suggestion: 'Shopify Payments'
+
+      - violation: 
+          - 'Shopify point of sale'
+          - 'Shopify point-of-sale'
+          - 'Shopify Point-of-Sale'
+        suggestion: 'Shopify POS'
+
+      - violation: 
+          - 'Shopify Plus client'
+          - 'Shopify plus customer'
+        case_insensitive: true
+        suggestion: 'Shopify Plus merchant'
+
+      - violation: 
+          - 'Shopify Plus clients'
+          - 'Shopify plus customers'
+        case_insensitive: true
+        suggestion: 'Shopify Plus merchants'   
+
+      - violation: 'Shopify shipping'
+        suggestion: 'Shopify Shipping'
+
+      - violation: 
+          - 'Template'
+        suggestion: 'template'
+
+      - violation: 
+          - 'Templates'
+        suggestion: 'templates'
+
+      - violation: 
+          - 'third party'
+          - '3rd party'
+        case_insensitive: true
+        suggestion: 'third-party'
+
+      - violation: 
+          - 'toolbar'
+          - 'meta nav'
+        case_insensitive: true
+        suggestion: 'top bar'
+
+      - violation: 
+          - 'transition'
+          - 'rotation style'
+        case_insensitive: true
+        suggestion: 'transition effect'
+
+      - violation: 
+          - 'trash-can button'
+          - 'trash can button'
+          - 'trash can'
+          - 'dustbin icon'
+          - 'dustbin'
+          - 'garbage'
+          - 'garbage button'
+          - 'delete button'
+        case_insensitive: true
+        suggestion: 'trash button'
+
+      - violation: 
+          - 'buy button'
+          - 'Buy button'
+        suggestion: 'Buy Button'
+
+      - violation: 
+          - 'buy buttons'
+          - 'Buy buttons'
+        suggestion: 'Buy Buttons'
+
+      - violation: 'carrier calculated shipping'
+        case_insensitive: true
+        suggestion: 'carrier-calculated shipping'
+
+      - violation: 'cart'
+        case_insensitive: true
+        suggestion: 'cart page'
+
+      - violation: 
+          - 'Handle'
+        suggestion: 'handle'
+
+      - violation: 
+          - 'Handles'
+        suggestion: 'handles'
+
+      - violation: 
+          - 'Hardware'
+          - 'Shopify Hardware'
+        suggestion: 'hardware'
+
+      - violation: 'info'
+        case_insensitive: true
+        suggestion: 'information'
+
+      - violation: 
+          - 'customers'
+          - 'clients'
+          - 'shop owners'
+          - 'store-owners'
+          - 'store owners'
+        case_insensitive: true
+        suggestion: 'merchants'
+
+      - violation: 
+          - 'same-day delivery'
+          - 'local delivery'
+        case_insensitive: true
+        suggestion: 'on-demand delivery'
+
+      - violation: 
+          - 'same-day deliveries'
+          - 'local deliveries'
+        case_insensitive: true
+        suggestion: 'on-demand deliveries'
+
+      - violation: 'On-Demand Delivery'
+        suggestion: 'on-demand delivery'
+
+      - violation: 'On-Demand Deliveries'
+        suggestion: 'on-demand deliveries'
+
+      - violation: 
+          - 'online store'
+        suggestion: 'Online Store'
+
+      - violation: 
+          - 'online stores'
+        suggestion: 'Online Stores'
+
+      - violation: 'ecommerce store'
+        case_insensitive: true
+        suggestion: 'Online Store'
+
+      - violation: 'ecommerce stores'
+        case_insensitive: true
+        suggestion: 'Online Stores'
+
+      - violation: 
+          - 'Payment Gateway'
+          - 'payment-gateway'
+        suggestion: 'payment gateway'
+
+      - violation: 
+          - 'Payment Gateways'
+          - 'payment-gateways'
+        suggestion: 'payment gateways'
+
+      - violation: 
+          - 'Shopify expert'
+        suggestion: 'Shopify Expert'
+
+      - violation: 
+          - 'Shopify experts'
+        suggestion: 'Shopify Experts'
+
+      - violation: 'display'
+        case_insensitive: true
+        suggestion: 'show'
+
+      - violation: 
+          - 'side bars'
+        case_insensitive: true
+        suggestion: 'sidebars'
+
+      - violation: 
+          - 'side bar'
+        case_insensitive: true
+        suggestion: 'sidebars'
+
+      - violation: 'product with only one variant'
+        case_insensitive: true
+        suggestion: 'single-variant product'
+
+      - violation: 
+          - 'social sharing'
+          - 'social'
+        suggestion: 'social media'
+
+      - violation: 
+          - 'social media button'
+        suggestion: 'social media icon'
+
+      - violation: 
+          - 'social media buttons'
+        suggestion: 'social media icons'
+
+      - violation:
+          - 'staffmember'
+          - 'staffmembers'
+          - 'staff'
+        case_insensitive: true  
+        suggestion: 'staff member(s)'
+
+      - violation: 
+          - 'shop'
+          - 'storefront'
+        case_insensitive: true
+        suggestion: 'store'
+
+      - violation: 
+          - 'shops'
+          - 'storefronts'
+        case_insensitive: true
+        suggestion: 'stores'
+
+      - violation: 
+          - 'other theme'
+          - 'inactive theme'
+          - 'alternative theme'
+        case_insensitive: true  
+        suggestion: 'unpublished theme'
+
+      - violation: 
+          - 'other themes'
+          - 'inactive themes'
+          - 'alternative themes'
+        case_insensitive: true  
+        suggestion: 'unpublished themes'
+
+
+      - violation: 
+          - 'url'
+          - 'web address'
+        suggestion: 'URL'
+
+      - violation: 
+          - 'urls'
+          - 'web addresses'
+        suggestion: 'URLs'
+
+      - violation: 
+          - 'Variant Image'
+        suggestion: 'variant image'
+
+      - violation: 
+          - 'Variant Images'
+        suggestion: 'variant images'
+         
+      - violation: 
+          - 'web page'
+        case_insensitive: true
+        suggestion: 'webpage'
+
+      - violation: 
+          - 'web pages'
+        case_insensitive: true
+        suggestion: 'webpages'
+
+      - violation: 
+          - 'web site'
+        case_insensitive: true
+        suggestion: 'website'
+
+      - violation: 
+          - 'web sites'
+        case_insensitive: true
+        suggestion: 'websites'
+
+      - violation:
+          - 'Wifi'
+          - 'wifi'
+          - 'Wi-Fi'
+        suggestion: 'wi-fi'
+
+      # Internal Facing
+      - violation: 
+          - 'ALT text'
+          - 'alt image text'
+          - 'ALT image text'
+          - 'alternative image text'
+        suggestion: 'alt text'
+
+      - violation: 
+          - 'below footer'
+          - 'sub-footer'
+        case_insensitive: true  
+        suggestion: 'bottom bar'
+
+      - violation:
+          - 'development shop'
+          - 'dev shop'
+        case_insensitive: true  
+        suggestion: 'development store'
+
+      - violation:
+          - 'development shops'
+          - 'dev shops'
+        case_insensitive: true  
+        suggestion: 'development stores'
+
+      - violation: 
+          - 'sub-heading'
+        case_insensitive: true  
+        suggestion: 'subheading'
+
+      - violation: 
+          - 'sub-headings'
+        case_insensitive: true  
+        suggestion: 'subheadings'
