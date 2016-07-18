@@ -341,8 +341,8 @@ linters:
         case_insensitive: true
         suggestion: 'Shopify'
 
-      - violation: 'shopify'
-        suggestion: 'Shopify'
+ #     - violation: 'shopify'
+#        suggestion: 'Shopify'
 
       - violation: 
           - 'Unlimited Shopify Plan'
