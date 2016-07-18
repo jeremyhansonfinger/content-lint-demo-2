@@ -476,6 +476,15 @@ linters:
           - 'Shopify plus customers'
         case_insensitive: true
         suggestion: 'Shopify Plus merchants'   
+        
+      - violation: 
+          - 'customers'
+          - 'clients'
+          - 'shop owners'
+          - 'store-owners'
+          - 'store owners'
+        case_insensitive: true
+        suggestion: 'merchants'
 
       - violation: 'Shopify shipping'
         suggestion: 'Shopify Shipping'
@@ -552,15 +561,6 @@ linters:
       - violation: 'info'
         case_insensitive: true
         suggestion: 'information'
-
-      - violation: 
-          - 'customers'
-          - 'clients'
-          - 'shop owners'
-          - 'store-owners'
-          - 'store owners'
-        case_insensitive: true
-        suggestion: 'merchants'
 
       - violation: 
           - 'same-day delivery'
