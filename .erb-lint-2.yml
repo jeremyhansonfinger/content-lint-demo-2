@@ -7,7 +7,7 @@ linters:
 
   # We use this to manage which css classes we don't want used in our HTML tags. No ERB tags as of yet.
   DeprecatedClasses:
-    enabled: false
+    enabled: true
     addendum: "If you’re having trouble feel free to reach out to [#admin-fed](https://shopify.slack.com/messages/admin-fed)."
     rule_set:
       #########################################################################################
