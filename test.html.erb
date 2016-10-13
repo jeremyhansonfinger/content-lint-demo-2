@@ -1,3 +1,23 @@
-<div>
-  Need help with Amazon? Go to the Shopify manual.
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style type='text/css'>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+  <title>Succesfully Connected to Amazon</title>
+</head>
+<body>
+
+  <p>Redirecting back to Shopify…</p>
+
+  <script>
+    window.onunload = function refreshParent() {
+      window.opener.location.reload();
+    }
+    window.close();
+  </script>
+</body>
+</html>
